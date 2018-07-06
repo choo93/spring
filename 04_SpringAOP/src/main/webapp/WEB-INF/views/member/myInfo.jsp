@@ -25,6 +25,12 @@
 		폰번호 : <input type="text" name="userPhone" value="${mem.userPhone }"><br> 
 		<input type="submit" value="회원정보 변경">
 	</form>
+	<button onclick="back();">뒤로 가기</button>
+	<script type="text/javascript">
+		function back(){
+			location.href = "/index.jsp";
+		}
+	</script>
 
 </body>
 </html>

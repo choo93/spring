@@ -14,28 +14,20 @@ import org.springframework.stereotype.Service;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
 	
-	private Log4jAdvice log;
-	
 	@Resource(name="memberDAO")
 	private MemberDAOImpl memberDAO;
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-	public MemberServiceImpl() {
-		log = new Log4jAdvice(); 
-	}
 
 	@Override
 	public Member selectOneMember(Member vo) {
-		log.pringLogging();
 		Member m = memberDAO.selectOneMember(jdbcTemplate,vo);
 		
 		return m;
 	}
 
 	public int updateMember(Member vo) {
-		log.pringLogging();
 		int result = memberDAO.updateMember(jdbcTemplate, vo);
 		
 		
@@ -43,19 +35,14 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	public int enrollMember(Member m) {
-		log.pringLogging();
 		return memberDAO.enrollMember(jdbcTemplate, m);
 	}
 
 	public int deleteMember(Member m) {
-		log.pringLogging();
-		
 		return memberDAO.deleteMember(jdbcTemplate,m);
 	}
 
 	public List<Member> showAll() {
-		log.pringLogging();
-		
 		return memberDAO.showAll(jdbcTemplate);
 	}
 
