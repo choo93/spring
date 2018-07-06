@@ -6,7 +6,7 @@
 
 	<!-- LogAdvice Bean 객체 생성 -->
 	<bean id="log" class="org.kh.member.common.LogAdvice" />
-	<bean id="log4j" class="org.kh.member.common.Log4jAdvice" />
+	<!-- <bean id="log4j" class="org.kh.member.common.Log4jAdvice" /> -->
 
 
 	<!-- AOP 등록 및 설정 -->
@@ -14,19 +14,14 @@
 		<aop:pointcut
 			expression="execution(* org.kh.member.model.service.*ServiceImpl.*(..))"
 			id="allPointcut" />
-		<aop:aspect ref="log4j">
-			<aop:before method="printLogging" pointcut-ref="allPointcut" />
-		</aop:aspect>
-		
-	</aop:config>
-	
-	<aop:config proxy-target-class="true">
 		<aop:pointcut
 			expression="execution(int org.kh.member.model.service.*ServiceImpl.*(org.kh.member.model.vo.Member))"
 			id="transactionPointcut" />
 		<aop:aspect ref="log">
+			<aop:around method="aroundLog" pointcut-ref="allPointcut" />
 			<aop:before method="printTransactionLog" pointcut-ref="transactionPointcut" />
 		</aop:aspect>
-		
+
 	</aop:config>
+
 </beans>

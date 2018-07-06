@@ -22,12 +22,14 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member selectOneMember(Member vo) {
+		System.out.println("비즈니스 로직 호출");
 		Member m = memberDAO.selectOneMember(jdbcTemplate,vo);
 		
 		return m;
 	}
 
 	public int updateMember(Member vo) {
+		System.out.println("비즈니스 로직 호출");
 		int result = memberDAO.updateMember(jdbcTemplate, vo);
 		
 		
@@ -35,14 +37,17 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	public int enrollMember(Member m) {
+		System.out.println("비즈니스 로직 호출");
 		return memberDAO.enrollMember(jdbcTemplate, m);
 	}
 
 	public int deleteMember(Member m) {
+		System.out.println("비즈니스 로직 호출");
 		return memberDAO.deleteMember(jdbcTemplate,m);
 	}
 
 	public List<Member> showAll() {
+		System.out.println("비즈니스 로직 호출");
 		return memberDAO.showAll(jdbcTemplate);
 	}
 
