@@ -22,7 +22,7 @@
 	
 	<aop:config proxy-target-class="true">
 		<aop:pointcut
-			expression="execution(int org.kh.member.model.service.*ServiceImpl.*(..))"
+			expression="execution(int org.kh.member.model.service.*ServiceImpl.*(org.kh.member.model.vo.Member))"
 			id="transactionPointcut" />
 		<aop:aspect ref="log">
 			<aop:before method="printTransactionLog" pointcut-ref="transactionPointcut" />
