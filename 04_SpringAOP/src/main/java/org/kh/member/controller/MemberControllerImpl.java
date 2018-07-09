@@ -59,7 +59,7 @@ public class MemberControllerImpl implements MemberController{
 		// 처리할 때 무조건 forward 방식만을 사용함
 		// (sendRedirect는 사용하지 않음)
 		if(m!=null) {
-			m.setUserPw(vo.getUserPw());
+			m.setUserPw(userPw);
 			session.setAttribute("member", m);
 			return "member/loginSuccess";
 		}else {
@@ -87,13 +87,14 @@ public class MemberControllerImpl implements MemberController{
 		
 		if(session.getAttribute("member")!=null) {
 			Member vo = (Member)session.getAttribute("member");
+			String noEncryPw = vo.getUserPw();
 			System.out.println(vo.getUserPw());
 			Member m = memberService.selectOneMember(vo);
 			System.out.println(m);
 			ModelAndView view = new ModelAndView();
 			
 			if(m!=null) {
-				m.setUserPw(vo.getUserPw());
+				m.setUserPw(noEncryPw);
 				session.setAttribute("member", m);
 				view.addObject("mem",m);
 				view.setViewName("member/myInfo");

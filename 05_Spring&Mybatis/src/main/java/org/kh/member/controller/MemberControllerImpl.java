@@ -27,16 +27,7 @@ public class MemberControllerImpl implements MemberController{
 
 	// 요건 안쓸거예요
 	@Override
-	public String selectOneMember(HttpServletRequest request, HttpServletResponse response) {
-		// 1. 인코딩 -> 이미 했어요
-		
-		// 2. 값 추출
-		Member vo = new Member();
-		vo.setUserId(request.getParameter("userId"));
-		vo.setUserPw(request.getParameter("userPw"));
-		
-		return null;
-	}
+	public String selectOneMember(HttpServletRequest request, HttpServletResponse response) {return null;}
 
 	@RequestMapping(value="/login.do")
 	public String selectOneMember(HttpServletRequest request, @RequestParam String userId, @RequestParam String userPw) {
@@ -59,7 +50,7 @@ public class MemberControllerImpl implements MemberController{
 		// 처리할 때 무조건 forward 방식만을 사용함
 		// (sendRedirect는 사용하지 않음)
 		if(m!=null) {
-			m.setUserPw(vo.getUserPw());
+			m.setUserPw(userPw);
 			session.setAttribute("member", m);
 			return "member/loginSuccess";
 		}else {
@@ -87,13 +78,14 @@ public class MemberControllerImpl implements MemberController{
 		
 		if(session.getAttribute("member")!=null) {
 			Member vo = (Member)session.getAttribute("member");
-			System.out.println(vo.getUserPw());
+			
+			String noEnPw = vo.getUserPw();
 			Member m = memberService.selectOneMember(vo);
-			System.out.println(m);
+			
 			ModelAndView view = new ModelAndView();
 			
 			if(m!=null) {
-				m.setUserPw(vo.getUserPw());
+				m.setUserPw(noEnPw);
 				session.setAttribute("member", m);
 				view.addObject("mem",m);
 				view.setViewName("member/myInfo");
@@ -110,10 +102,10 @@ public class MemberControllerImpl implements MemberController{
 	
 	@RequestMapping(value="/mUpdate.do")
 	public String memberUpdate(Member vo, HttpSession session) {
-		
+		String noEnPw = vo.getUserPw();
 		int result = memberService.updateMember(vo);
-		
 		if(result>0) {
+			vo.setUserPw(noEnPw);
 			session.setAttribute("member", vo);
 			return "member/mUpdateSuccess";
 		}else {
