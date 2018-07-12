@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+div {
+	border: 1px solid black;
+}
+
+#wrapper {
+	width: 100%;
+	height: 600px;
+}
+
+.contents {
+	height: 20%;
+}
+
+.contents>div {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+.contents>div>* {
+	float: left;
+}
+
+.contents>div>button {
+	width: 100%;
+	height: 100%;
+}
+
+#text1, #call, #tts {
+	width: 70%;
+	height: 100%;
+}
+
+.contents:first-child>div:last-child>button, .contents:nth-child(3)>div:last-child>button,
+	.contents:nth-child(4)>div:first-child>button {
+	width: 30%;
+	height: 100%;
+}
+
+.contents:nth-child(3)>div:first-child>button {
+	width: 50%;
+	height: 100%;
+}
+</style>
+
+<script type="text/javascript">
+	function btn1(){
+		if(typeof Android !== "undefined" && Android !== null){
+			
+			Android.func1();
+		}else{
+			alert("Not viewing in webView!! 11");
+		}
+	}
+	
+	function btn2(){
+		var data = document.getElementById("text1").value;
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.func2(data);
+		}else{
+			alert("Not viewing in webView!! 22");
+		}
+	}
+	
+	function vibe(){
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.vibe();
+		}else{
+			alert("Not viewing in webView!! 33");
+		}
+	}
+	
+	function date(){
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.date();
+		}else{
+			alert("Not viewing in webView!! 44");
+		}
+	}
+	
+	function volUp(){
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.volUp();
+		}else{
+			alert("Not viewing in webView!! 55-1");
+		}
+	}
+	
+	function volDown(){
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.volDown();
+		}else{
+			alert("Not viewing in webView!! 55-2");
+		}
+	}
+	
+	function call(){
+		var phoneNum = document.getElementById('call').value;
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.call(phoneNum);
+		}else{
+			alert("Not viewing in webView!! 66");
+		}
+	}
+	
+	function tts(){
+		var text = document.getElementById('tts').value;
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.textToSpeach(text);
+		}else{
+			alert("Not viewing in webView!! 77");
+		}
+	}
+	
+	function sttToast(){
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.sttToast();
+		}else{
+			alert("Not viewing in webView!! 88");
+		}
+	}
+	
+	function sttVoice(){
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.sttVoice();
+		}else{
+			alert("Not viewing in webView!! 99");
+		}
+	}
+	
+	function transl(){
+		if(typeof Android !== "undefined" && Android !== null){
+			Android.transl();
+		}else{
+			alert("Not viewing in webView!! 1010");
+		}
+	}
+</script>
+
+<body>
+	<div id="wrapper">
+		<div class="contents">
+			<div>
+				<button onclick="btn1();">버튼</button>
+			</div>
+			<div>
+				<input type="text" id="text1">
+				<button onclick="btn2();">입력값 출력하기</button>
+			</div>
+		</div>
+		<div class="contents">
+			<div>
+				<button onclick="vibe();">진동버튼</button>
+			</div>
+			<div>
+				<button onclick="date();">날짜버튼</button>
+			</div>
+		</div>
+		<div class="contents">
+			<div>
+				<button onclick="volUp();">볼륨 UP</button>
+				<button onclick="volDown();">볼륨 DOWN</button>
+			</div>
+			<div>
+				<input type="text" id="call">
+				<button onclick="call();">전화걸기</button>
+			</div>
+		</div>
+		<div class="contents">
+			<div>
+				<input type="text" id="tts">
+				<button onclick="tts();">TTS 기능 작동</button>
+			</div>
+			<div>
+				<button onclick="sttToast();">STT 작동(Toast출력)</button>
+			</div>
+		</div>
+		<div class="contents">
+			<div>
+				<button onclick="sttVoice();">STT 작동(음성출력)</button>
+			</div>
+			<div>
+				<button onclick="transl();">STT 작동3(파파고 번역)</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
